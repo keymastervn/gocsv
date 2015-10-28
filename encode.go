@@ -1,4 +1,4 @@
-package gocsv
+package gocsv_alt
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ func (encode *encoder) writeTo(in interface{}) error {
 	if err := encode.ensureInInnerType(inInnerType); err != nil {
 		return err
 	}
-	csvWriter := getCSVWriter(encode.out)               // Get the CSV writer
+	csvWriter := getCSVWriter(encode.out)           // Get the CSV writer
 	inInnerStructInfo := getStructInfo(inInnerType) // Get the inner struct info to get CSV annotations
 	csvHeadersLabels := make([]string, len(inInnerStructInfo.Fields))
 	for i, fieldInfo := range inInnerStructInfo.Fields { // Used to write the header (first line) in CSV

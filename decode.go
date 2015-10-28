@@ -1,4 +1,4 @@
-package gocsv
+package gocsv_alt
 
 import (
 	"fmt"

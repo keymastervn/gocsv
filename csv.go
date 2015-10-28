@@ -4,7 +4,7 @@
 
 // The GoCSV package aims to provide easy CSV serialization and deserialization to the golang programming language
 
-package gocsv
+package gocsv_alt
 
 import (
 	"bytes"
@@ -40,7 +40,9 @@ var selfCSVReader = DefaultCSVReader
 
 // DefaultCSVReader is the default CSV reader used to parse CSV (cf. csv.NewReader)
 func DefaultCSVReader(in io.Reader) *csv.Reader {
-	return csv.NewReader(in)
+	reader := csv.NewReader(in)
+	reader.Comma = '\t'
+	return reader
 }
 
 // LazyCSVReader returns a lazy CSV reader, with LazyQuotes and TrimLeadingSpace.
@@ -113,4 +115,3 @@ func UnmarshalBytes(in []byte, out interface{}) (err error) {
 func Unmarshal(in io.Reader, out interface{}) (err error) {
 	return newDecoder(in).readTo(out)
 }
-

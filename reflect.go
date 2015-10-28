@@ -1,4 +1,4 @@
-package gocsv
+package gocsv_alt
 
 import (
 	"reflect"
@@ -22,11 +22,6 @@ type fieldInfo struct {
 
 var structMap = make(map[reflect.Type]*structInfo)
 var structMapMutex sync.RWMutex
-var structDelim = ","
-
-func SetDelim(newDelim string) {
-	structDelim = newDelim;	
-}
 
 func getStructInfo(rType reflect.Type) *structInfo {
 	structMapMutex.RLock()
@@ -44,7 +39,7 @@ func getStructInfo(rType reflect.Type) *structInfo {
 		}
 		fieldInfo := fieldInfo{Num: i}
 		fieldTag := field.Tag.Get("csv")
-		fieldTags := strings.Split(fieldTag, structDelim)
+		fieldTags := strings.Split(fieldTag, ",")
 		for _, fieldTagEntry := range fieldTags {
 			if fieldTagEntry == "omitempty" {
 				fieldInfo.OmitEmpty = true
